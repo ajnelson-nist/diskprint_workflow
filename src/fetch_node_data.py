@@ -1,23 +1,37 @@
-#!/opt/local/bin/python3.3
+#!/usr/bin/env python3
+
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
 
 """
 This program prints a single path to a requested node data component.  For instance, pass 'disk 123-4-567-8-90' to get the path to the disk image file of node_id 123-4-etc.
 """
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 import logging
 import os
 
 _logger = logging.getLogger(os.path.basename(__file__))
 
-import differ_library
+import differ_db_library
+import differ_func_library
 
 def main():
     global args
-    (conn, cursor) = differ_library.db_conn_from_config_path(args.config)
+    (conn, cursor) = differ_db_library.db_conn_from_config_path(args.config)
 
-    (osetid, appetid, sliceid) = differ_library.split_node_id(args.node_id)
+    (osetid, appetid, sliceid) = differ_func_library.split_node_id(args.node_id)
 
     sql_fetch = """
 SELECT

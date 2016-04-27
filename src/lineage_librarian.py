@@ -1,15 +1,29 @@
-#!/opt/local/bin/python2.7
+#!/usr/bin/env python
+
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
+
 """
 Produces a sequence list for the given sequence-identifying triplet.
 """
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 
 import os
 import sys
 import logging
 
-import differ_library
+import differ_db_library
 
 def list_ids(conn, cursor):
     sql_get_ids = """\
@@ -48,7 +62,7 @@ ORDER BY
 def main():
     global args
 
-    (conn, cursor) = differ_library.db_conn_from_config_path(args.config)
+    (conn, cursor) = differ_db_library.db_conn_from_config_path(args.config)
 
     if args.command == "list_ids":
         list_ids(conn, cursor)

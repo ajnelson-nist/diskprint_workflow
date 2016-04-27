@@ -1,4 +1,17 @@
-#!/opt/local/bin/python3.3
+#!/usr/bin/env python3
+
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
 
 """
 make_sequence_deltas.py: Aggregate differences in ouput of Fiwalk and RegXML Extractor.
@@ -6,7 +19,7 @@ make_sequence_deltas.py: Aggregate differences in ouput of Fiwalk and RegXML Ext
 For usage instructions, see the argument parser description below, or run this script without arguments.
 """
 
-__version__ = "0.3.3"
+__version__ = "0.3.4"
 
 import sys
 import os
@@ -18,7 +31,7 @@ import logging
 _logger = logging.getLogger(os.path.basename(__file__))
 
 import dfxml
-import differ_library
+import differ_func_library
 
 """
 AJN: Sorry, I realized pretty late that the slice type was a required field. This hard-coded variable can be deleted after the slice type is queried.
@@ -41,7 +54,7 @@ def nodeid_from_regxml_path(path):
     assert path[0] == "/"  #Requires absolute path
     path_parts = path.split("/")
     nodeid = path_parts[-3]
-    (osetid, appetid, sliceid) = differ_library.split_node_id(nodeid)
+    (osetid, appetid, sliceid) = differ_func_library.split_node_id(nodeid)
     return (osetid, appetid, sliceid)
 
 def main():

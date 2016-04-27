@@ -20,7 +20,7 @@ This script:
  * Passes each sequence ID (label) to stdout.
 """
 
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 
 import os
 import sys
@@ -30,13 +30,13 @@ import subprocess
 
 _logger = logging.getLogger(os.path.basename(__file__))
 
-import differ_library
+import differ_db_library
 
 def main():
     global args
     _logger.debug("Running main() of file: %r." % __file__)
 
-    (inconn,incursor) = differ_library.db_conn_from_config_path(args.config)
+    (inconn,incursor) = differ_db_library.db_conn_from_config_path(args.config)
 
     #Fetch work queue
     query = """

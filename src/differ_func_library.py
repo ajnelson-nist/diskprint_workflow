@@ -1,4 +1,3 @@
-#!/bin/bash
 
 # For changes made after April 1, 2016:
 #
@@ -13,19 +12,20 @@
 #
 # We would appreciate acknowledgement if the software is used.
 
-#One-liner c/o http://stackoverflow.com/a/246128/1207160
-script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
-top_srcdir="${script_dir}/.."
+__version__ = "0.4.0"
 
-source "${top_srcdir}/src/_pick_pythons.sh"
+import os
+import logging
+_logger = logging.getLogger(os.path.basename(__file__))
 
-set -e
-set -x
-
-for PYTHON in "$PYTHON2" "$PYTHON3"; do
-  $PYTHON "${top_srcdir}/src/differ_db_library.py" --config="${top_srcdir}/src/differ.cfg" --check --debug
-done
-
-set +x
-echo "All's well."
-echo "Done."
+def split_node_id(node_id_string):
+    parts = node_id_string.split("-")
+    try:
+        assert len(parts) == 5
+    except AssertionError as e:
+        _logger.error("Unexpected format of node id string: %r" % node_id_string)
+        raise
+    osetid = "-".join(parts[0:2])
+    appetid = "-".join(parts[2:4])
+    sliceid = int(parts[4])
+    return (osetid, appetid, sliceid)

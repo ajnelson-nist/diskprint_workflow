@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
+
 # Run this script to see if the current executing environment will support the differencing workflow.
 
 set -e
@@ -26,8 +39,8 @@ $PYTHON3 -c 'import psycopg2, psycopg2.extras'
 #Check for local Python modules
 pushd "${top_srcdir}/src" >/dev/null
 $PYTHON3 -c 'import dfxml'
-$PYTHON2 -c 'import differ_library'
-$PYTHON3 -c 'import differ_library'
+$PYTHON2 -c 'import differ_db_library'
+$PYTHON3 -c 'import differ_db_library'
 popd >/dev/null
 
 #Check that the DFXML regression tests pass
