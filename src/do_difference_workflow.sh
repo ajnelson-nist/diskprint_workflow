@@ -668,6 +668,19 @@ if [ $any_errors -gt 0 ]; then
 fi
 
 
+#Make Registry new-cellname sets
+$my_inorder_parallel \
+  echo "Note: Starting Registry differencing vs. previous image, for \"{}\"." \>\&2 \; \
+  logandrunscript edge "$dwf_script_dirname/make_registry_diff_db.sh" {} \; \
+  :::: "$dwf_node_sequence_file"
+any_errors=$(count_script_errors edge "make_registry_diff_db.sh")
+#Bail out if any errors were found in the loop.
+if [ $any_errors -gt 0 ]; then
+  echo "Note: Encountered $any_errors errors making Registry new-cell sets.  Quitting.  See above error log for notes on what went wrong (grep for 'ERROR: ')." >&2
+  exit 1
+fi
+
+
 #Create the deltas dataset for the whole sequence
 logandrunscript sequence "$dwf_script_dirname/make_sequence_deltas.sh" "$dwf_sequence_id"
 any_errors=$(count_script_errors sequence "make_sequence_deltas.sh")
