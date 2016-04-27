@@ -656,6 +656,18 @@ if [ $any_errors -gt 0 ]; then
 fi
 
 
+#Format RegXML Extractor output into Registry cellname sets
+$my_inorder_parallel \
+  echo "Note: Starting Registry cellname set transcription for \"{}\"." \>\&2 \; \
+  logandrunscript node "$dwf_script_dirname/format_registry_single_state.sh" {} \; \
+  :::: "$dwf_node_sequence_file"
+any_errors=$(count_script_errors node "format_registry_single_state.sh")
+if [ $any_errors -gt 0 ]; then
+  echo "Note: Encountered $any_errors errors while generating Registry cellname sets.  Quitting.  See above error log for notes on what went wrong (grep for 'ERROR: ')." >&2
+  exit 1
+fi
+
+
 #Create the deltas dataset for the whole sequence
 logandrunscript sequence "$dwf_script_dirname/make_sequence_deltas.sh" "$dwf_sequence_id"
 any_errors=$(count_script_errors sequence "make_sequence_deltas.sh")
