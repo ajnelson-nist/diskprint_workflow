@@ -566,7 +566,7 @@ any_errors=$(count_script_errors node "validate_fiwalk_dfxml_all.sh")
 #Create differential DFXML output directories after all Fiwalk output is successfully done
 $my_inorder_parallel \
   echo "Note: Starting differential DFXML processing, vs. baseline, for \"{}\"." \>\&2 \; \
-  logandrunscript edge $dwf_script_dirname/make_differential_dfxml_baseline.sh" {} "\; \
+  logandrunscript edge "$dwf_script_dirname/make_differential_dfxml_baseline.sh" {} \; \
   :::: "$dwf_node_sequence_file"
 any_errors=$(count_script_errors edge "make_differential_dfxml_baseline.sh")
 
