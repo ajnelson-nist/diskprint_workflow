@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
+
 #This script does the entire differencing workflow for a sequence of disk slice tarballs.  It assumes that at invocation time, the database is updated with diskprint storage-referencing (e.g. paths to disk images) and sequence-defining metadata.
 
 #Include PATH extensions
@@ -250,7 +263,7 @@ if [ $parallel_all -eq 1 ]; then
   if [ $report_pidlog -eq 1 ]; then
     parg_report_pidlog="--report-pidlog"
   fi
-  "$PYTHON2" sliceprocessor.py --config "$DIFFER_CONFIG" | \
+  "$PYTHON2" "$this_script_dir/sliceprocessor.py" --config "$DIFFER_CONFIG" | \
     parallel --quote -j1 \
       "$0" "$parg_report_pidlog" "$parg_re_export" --cleanup ignore -j $num_jobs --config "$DIFFER_CONFIG" --quiet {} "$@"
   exit 0
