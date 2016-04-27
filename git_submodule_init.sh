@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# For changes made after April 1, 2016:
+#
+# This software was developed at the National Institute of Standards
+# and Technology by employees of the Federal Government in the course
+# of their official duties. Pursuant to title 17 Section 105 of the
+# United States Code this software is not subject to copyright
+# protection and is in the public domain. NIST assumes no
+# responsibility whatsoever for its use by other parties, and makes
+# no guarantees, expressed or implied, about its quality,
+# reliability, or any other characteristic.
+#
+# We would appreciate acknowledgement if the software is used.
+
 git submodule init deps/python-cybox
 git submodule sync deps/python-cybox
 git submodule update deps/python-cybox
@@ -12,8 +25,8 @@ DFXMLSCHEMA_REPO=https://github.com/ajnelson/dfxml_schema.git
 DFXMLSCHEMA_COMMIT=532f994ef652df030cd3f7b96b0870d3fffaec68
 DFXML_REPO=https://github.com/simsong/dfxml.git
 DFXML_COMMIT=87d51b64f187097906919339cb0d1142d60204f7
-RE_REPO=https://github.com/ajnelson/regxml_extractor.git
-RE_COMMIT=f724d85890bb3afa199550054a40dfbd505aa6b8
+RE_REPO=https://github.com/ajnelson-nist/regxml_extractor.git
+RE_COMMIT=86d44b00d085201042ad73c85298b4a5b054a3d1
 
 #Fetch Git repositories with git-submodule...only, in SVN.
 
